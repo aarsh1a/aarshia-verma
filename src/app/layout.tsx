@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import PageTransition from "@/components/page-transition";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -71,7 +72,9 @@ export default function RootLayout({
           <TooltipProvider>
             <div className="relative flex min-h-screen flex-col">
               <Navbar />
-              <div className="flex-1">{children}</div>
+              <div className="flex-1">
+                <PageTransition>{children}</PageTransition>
+              </div>
             </div>
           </TooltipProvider>
         </ThemeProvider>

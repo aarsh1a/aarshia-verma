@@ -1,10 +1,10 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon, SparklesIcon } from "lucide-react";
+import { HomeIcon, NotebookIcon, Orbit, FolderKanban } from "lucide-react";
 
 export const DATA = {
-  name: "Aarshia Verma",
-  initials: "HC",
-  url: "https://heilcheng.github.io",
+  name: "aarshia verma",
+  initials: "AV",
+  url: "https://aarsh1a.github.io",
   description:
     "A rising junior with research interests in Mathematical Biology and AI for biomedicine. I'm also a software engineer specializing in AI/ML, and I love building fun, meaningful apps with React Native. On the side, I share my journey with over 10,000 followers on Threads and 25,000 on LinkedIn.",
   summary:
@@ -12,31 +12,24 @@ export const DATA = {
   avatarUrl: "/me.jpeg",
 
   navbar: [
-    { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" },
-    { href: "/supernova", icon: SparklesIcon, label: "Supernova" },
+    { href: "/", icon: HomeIcon, label: "home" },
+    { href: "/projects", icon: FolderKanban, label: "projects" },
+    { href: "/blog", icon: NotebookIcon, label: "blog" },
   ],
   contact: {
     email: "connectaarshia@gmail.com",
     social: {
-      GitHub: {
-        name: "GitHub",
+      github: {
+        name: "github",
         url: "https://github.com/aarsh1a",
         icon: Icons.github,
         navbar: true,
       },
-      LinkedIn: {
-        name: "LinkedIn",
+      linkedin: {
+        name: "linkedin",
         url: "https://linkedin.com/in/aarshia-verma",
         icon: Icons.linkedin,
         navbar: true,
-      },
-
-      email: {
-        name: "Send Email",
-        url: "mailto:connectaarshia@gmail.com",
-        icon: Icons.email,
-        navbar: false,
       },
     },
   },
@@ -51,104 +44,31 @@ export const DATA = {
       start: "May 2025",
       end: "Present",
       bullets: [
-        "Fine-tuned DeepSeek LLM on 5G telco specs, enabling K8sGPT to generate context-aware diagnostics for Kubernetes clusters with improved accuracy and relevance in live testing.",
-        "Designed a RAG pipeline (LangChain + ChromaDB) to inject domain knowledge, boosting context relevance for Kubernetes error explanations."
+        "fine-tuned DeepSeek LLM on 5G telco specs, enabling K8sGPT to generate context-aware diagnostics for kubernetes clusters with improved accuracy and relevance in live testing.",
+        "designed a RAG pipeline (langChain + chromadb) to inject domain knowledge, boosting context relevance for kubernetes error explanations."
       ],
     },
   ],
   projects: [
-    {
-      title: "MEQ-Bench",
-      href: "https://github.com/heilcheng/MEQ-Bench",
-      dates: "2024 - Present",
-      active: true,
-      description:
-        "The first benchmark designed to evaluate an LLM's ability to generate audience-adaptive medical explanations for diverse stakeholders, including physicians, nurses, and patients.",
-      technologies: [
-        "Python",
-        "LLM",
-        "Medical AI",
-        "Benchmarking",
-      ],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/heilcheng/MEQ-Bench",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "",
-    },
-    {
-      title: "Gemma Benchmark Suite",
-      href: "https://github.com/heilcheng/gemma-benchmark",
-      dates: "2024 - Present",
-      active: true,
-      description:
-        "An evaluation suite for Google's Gemma models across academic LLM benchmarks, with quantization support and efficiency profiling.",
-      technologies: [
-        "Python",
-        "LLM",
-        "Benchmarking",
-        "Quantization",
-      ],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/heilcheng/gemma-benchmark",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "",
-    },
-    {
-      title: "DeepChem Drug Formulation Tutorial",
-      href: "https://github.com/heilcheng/deepchem-drug-formulation",
-      dates: "2024 - Present",
-      active: true,
-      description:
-        "A tutorial using DeepChem for predicting key pharmaceutical properties and visualizing molecular behaviors for drug discovery.",
-      technologies: [
-        "Python",
-        "DeepChem",
-        "Drug Discovery",
-        "Molecular Biology",
-      ],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/heilcheng/deepchem-drug-formulation",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "",
-    },
-    {
-      title: "Truth or Dare (Cantonese)",
-      href: "https://github.com/heilcheng/Truth-or-Dare-Canto",
-      dates: "2024 - Present",
-      active: true,
-      description:
-        "A Truth or Dare question generator web app built in Cantonese, using React for webapp and React Native for Apps.",
-      technologies: [
-        "React",
-        "React Native",
-        "JavaScript",
-        "Cantonese",
-      ],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/heilcheng/Truth-or-Dare-Canto",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "",
-    },
+    // Add your projects here
+    // Example:
+    // {
+    //   title: "Project Name",
+    //   href: "https://github.com/aarsh1a/project",
+    //   dates: "2024 - Present",
+    //   active: true,
+    //   description: "Project description",
+    //   technologies: ["Tech1", "Tech2"],
+    //   links: [
+    //     {
+    //       type: "Source",
+    //       href: "https://github.com/aarsh1a/project",
+    //       icon: <Icons.github className="size-3" />,
+    //     },
+    //   ],
+    //   image: "",
+    //   video: "",
+    // },
   ],
   books: [
     {

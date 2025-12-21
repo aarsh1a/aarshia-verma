@@ -11,13 +11,13 @@ import {
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Orbit } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { StarryNight } from "./starry-night";
+import { Aurora } from "./aurora";
 
 export default function Navbar() {
-  const [isStarryNightActive, setIsStarryNightActive] = useState(false);
+  const [isAuroraActive, setIsAuroraActive] = useState(true);
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
@@ -73,34 +73,43 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={() => setIsStarryNightActive(!isStarryNightActive)}
+                onClick={() => setIsAuroraActive(!isAuroraActive)}
                 className={cn(
                   buttonVariants({ variant: "ghost", size: "icon" }),
                   "size-12",
-                  isStarryNightActive && "bg-purple-100 dark:bg-purple-900"
+                  isAuroraActive && "bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
                 )}
               >
                 <Sparkles className="size-4" />
               </motion.button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{isStarryNightActive ? "Hide Starry Night" : "Show Starry Night"}</p>
+              <p>{isAuroraActive ? "deactivate aurora" : "activate aurora"}</p>
             </TooltipContent>
           </Tooltip>
         </DockIcon>
         <DockIcon>
           <Tooltip>
             <TooltipTrigger asChild>
+              <Link
+                href="/blackhole"
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "icon" }),
+                  "size-12"
+                )}
+              >
+                <Orbit className="size-4" />
+              </Link>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Theme</p>
+              <p>black hole</p>
             </TooltipContent>
           </Tooltip>
         </DockIcon>
       </Dock>
 
-      {/* StarryNight Component */}
-      <StarryNight isActive={isStarryNightActive} />
+      {/* Aurora Background Effect */}
+      <Aurora isActive={isAuroraActive} />
     </div>
   );
 }

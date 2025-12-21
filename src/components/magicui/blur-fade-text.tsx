@@ -23,12 +23,12 @@ const BlurFadeText = ({
   variant,
   characterDelay = 0.03,
   delay = 0,
-  yOffset = 8,
+  yOffset = 0,
   animateByCharacter = false,
 }: BlurFadeTextProps) => {
   const defaultVariants: Variants = {
-    hidden: { y: yOffset, opacity: 0, filter: "blur(8px)" },
-    visible: { y: -yOffset, opacity: 1, filter: "blur(0px)" },
+    hidden: { y: yOffset, opacity: 0 },
+    visible: { y: 0, opacity: 1 },
   };
   const combinedVariants = variant || defaultVariants;
   const characters = useMemo(() => Array.from(text), [text]);

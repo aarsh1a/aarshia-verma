@@ -50,28 +50,6 @@ export const ContactOrbiting = ({ delay = 0 }: ContactOrbitingProps) => {
       animate={isInView ? "visible" : "hidden"}
     >
       <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full">
-        <div className="space-y-3">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-            Get in Touch.
-          </h2>
-          <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Want to chat? Feel free to reach out via{" "}
-            <Link
-              href={DATA.contact.social.email.url}
-              className="text-blue-500 hover:underline"
-            >
-              email
-            </Link>{" "}
-            or{" "}
-            <Link
-              href={DATA.contact.social.LinkedIn.url}
-              className="text-blue-500 hover:underline"
-            >
-              LinkedIn
-            </Link>{" "}
-            and I&apos;ll respond whenever I can.
-          </p>
-        </div>
 
         {/* Orbiting Circles */}
         <motion.div
@@ -84,7 +62,7 @@ export const ContactOrbiting = ({ delay = 0 }: ContactOrbitingProps) => {
             <Mail className="size-8 text-blue-600" />
             <Mail className="size-8 text-blue-600" />
           </OrbitingCircles>
-          
+
           {/* Outer orbit - Social icons */}
           <OrbitingCircles radius={140} reverse duration={20}>
             <Linkedin className="size-8 text-blue-700" />
@@ -95,14 +73,7 @@ export const ContactOrbiting = ({ delay = 0 }: ContactOrbitingProps) => {
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="flex gap-4">
               <Link
-                href={DATA.contact.social.email.url}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-background border shadow-lg hover:scale-110 transition-transform duration-200"
-                title="Send Email"
-              >
-                <Mail className="size-6 text-foreground" />
-              </Link>
-              <Link
-                href={DATA.contact.social.LinkedIn.url}
+                href={DATA.contact.social.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-12 h-12 rounded-full bg-background border shadow-lg hover:scale-110 transition-transform duration-200"
@@ -111,7 +82,7 @@ export const ContactOrbiting = ({ delay = 0 }: ContactOrbitingProps) => {
                 <Linkedin className="size-6 text-foreground" />
               </Link>
               <Link
-                href={DATA.contact.social.GitHub.url}
+                href={DATA.contact.social.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-12 h-12 rounded-full bg-background border shadow-lg hover:scale-110 transition-transform duration-200"

@@ -3,8 +3,8 @@
 import dynamic from "next/dynamic";
 
 const GitHubContributions = dynamic(() => import("@/components/github-contributions").then(mod => mod.GitHubContributions), { ssr: false });
-const EthicsQuote = dynamic(() => import("@/components/ethics-quote").then(mod => mod.EthicsQuote), { ssr: false });
 const TechStack = dynamic(() => import("@/components/tech-stack").then(mod => mod.TechStack), { ssr: false });
+const ChessStack = dynamic(() => import("@/components/chess-stack").then(mod => mod.ChessStack), { ssr: false });
 const TimelineItem = dynamic(() => import("@/components/resume-card").then(mod => mod.TimelineItem), { ssr: false });
 
 
@@ -34,7 +34,7 @@ export default function Page() {
                   delay={BLUR_FADE_DELAY}
                   className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
                   yOffset={8}
-                  text={`Hi, I'm ${DATA.name.split(" ")[0]}.`}
+                  text={`hi, i'm ${DATA.name.split(" ")[0]}`}
                 />
                 <BlurFadeText
                   delay={BLUR_FADE_DELAY * 1.5}
@@ -48,12 +48,6 @@ export default function Page() {
                   text={DATA.description}
                 />
               </div>
-              <BlurFade delay={BLUR_FADE_DELAY * 3}>
-                <Avatar className="size-28 border">
-                  <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                  <AvatarFallback>{DATA.initials}</AvatarFallback>
-                </Avatar>
-              </BlurFade>
             </div>
           </div>
         </section>
@@ -93,12 +87,6 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="ethics" className="mb-section-lg">
-          <div className="space-y-content-md">
-            <EthicsQuote delay={BLUR_FADE_DELAY * 15.5} />
-          </div>
-        </section>
-
         <section id="work" className="mb-section-lg">
           <div className="space-y-12">
             <BlurFade delay={BLUR_FADE_DELAY * 17}>
@@ -124,7 +112,7 @@ export default function Page() {
         </section>
 
         <section id="tech-stack" className="mb-section-lg">
-          <TechStack delay={BLUR_FADE_DELAY * 21} />
+          <ChessStack delay={BLUR_FADE_DELAY * 21} />
         </section>
 
         <section id="projects" className="mb-section-lg">
