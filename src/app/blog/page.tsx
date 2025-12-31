@@ -115,7 +115,7 @@ export default function BlogPage() {
                 </button>
 
                 <p className="text-muted-foreground text-center py-6 leading-relaxed text-sm">
-                  i can't figure out how to embed substack here yet so this will make do for now
+                  i can&apos;t figure out how to embed substack here yet so this will make do for now
                 </p>
               </div>
             </motion.div>

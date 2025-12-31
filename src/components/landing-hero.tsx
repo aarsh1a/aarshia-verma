@@ -91,8 +91,8 @@ export function LandingHero() {
                 {/* Description Text */}
                 <BlurFade delay={BLUR_FADE_DELAY * 2} className="max-w-2xl text-center">
                     <p className="text-muted-foreground md:text-xl font-sans text-pretty">
-                        showcase of things i'm interested in, things i've worked on, and
-                        things i'm currently exploring, mostly across computer science,
+                        showcase of things i&apos;m interested in, things i&apos;ve worked on, and
+                        things i&apos;m currently exploring, mostly across computer science,
                         research and systems-oriented problem solving.
                     </p>
                 </BlurFade>

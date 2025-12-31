@@ -5,6 +5,7 @@ import BlurFade from "@/components/magicui/blur-fade";
 import { DATA } from "@/data/resume";
 import { LandingHero } from "@/components/landing-hero";
 import { PostItSection } from "@/components/post-it-section";
+import { Analytics } from "@vercel/analytics/next"
 
 const TechStack = dynamic(() => import("@/components/tech-stack").then(mod => mod.TechStack), { ssr: false });
 const ChessStack = dynamic(() => import("@/components/chess-stack").then(mod => mod.ChessStack), { ssr: false });
@@ -53,7 +54,7 @@ export default function Page() {
           <div className="space-y-8">
             <BlurFade delay={BLUR_FADE_DELAY * 22}>
               <p className="text-muted-foreground md:text-lg leading-relaxed text-center max-w-3xl mx-auto">
-                i'm particularly drawn to areas where computation intersects with analysis, modeling, or research, and i tend to use projects as a way to explore concepts more deeply rather than as finished endpoints.
+                i&apos;m particularly drawn to areas where computation intersects with analysis, modeling, or research, and i tend to use projects as a way to explore concepts more deeply rather than as finished endpoints.
               </p>
             </BlurFade>
             <PostItSection delay={BLUR_FADE_DELAY * 23} />

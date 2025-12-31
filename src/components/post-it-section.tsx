@@ -4,36 +4,47 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 
+interface PostItLine {
+    text: string;
+    href?: string;
+}
+
 interface PostItNote {
     title: string;
-    lines: string[];
+    lines: (string | PostItLine)[];
     rotation?: number;
 }
 
 const NOTES: PostItNote[] = [
     {
         title: "education",
-        lines: ["b.tech in computer science", "mit, bangalore", "(2023 — present)"],
+        lines: ["b.tech in computer science", "manipal institute of technology, bangalore  ", "(2023 — 2027)"],
         rotation: -2,
     },
     {
-        title: "open source",
-        lines: ["gsoc", "lfx mentorship"],
+        title: "certifications",
+        lines: [
+            { text: "- ai agents with transformers", href: "https://drive.google.com/file/d/1ebXMZHP0kF_u-yp9Winq3gmZGc45J_ch/view?usp=sharing" },
+            { text: "- langchain for llm apps", href: "https://learn.deeplearning.ai/accomplishments/e300a47c-dcf3-40f6-80df-ee73434764a3?usp=sharing" },
+            { text: "- networking & initial config", href: "https://www.credly.com/badges/fc0c2088-d913-439b-b87d-1fb8363a147e/public_url" },
+            { text: "- kubernetes pod management", href: "https://www.coursera.org/account/accomplishments/verify/DAWQDHW5S4J1" },
+            { text: "- software arch job simulation", href: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/pmnMSL4QiQ9JCgE3W/kkE9HyeNcw6rwCRGw_pmnMSL4QiQ9JCgE3W_XAxaxQdaqA7aneDCN_1751802473014_completion_certificate.pdf" },
+        ],
         rotation: 1.5,
     },
     {
         title: "learning",
-        lines: ["systems", "infrastructure", "llms"],
+        lines: ["- operating systems", "- computer networks", "- distributed systems", "- systems programming", "- applied machine learning"],
         rotation: -1,
     },
     {
         title: "problem solving",
-        lines: ["leetcode", "(ongoing)"],
+        lines: ["- leetcode", "100+ problems and counting", "- open source contributor", "gsoc • lfx mentorship • outreachy"],
         rotation: 2,
     },
     {
-        title: "building",
-        lines: ["projects > polish", "tools > demos"],
+        title: "detour ideas",
+        lines: ["- diffusion models (theory-heavy directions)", "- pure front-end animation experiments"],
         rotation: -1.5,
     },
 ];
@@ -79,10 +90,9 @@ function PostIt({
             animate={{ opacity: 1, y: 0, rotate: note.rotation || 0 }}
             transition={{ delay, duration: 0.5, ease: "easeOut" }}
             whileHover={{
-                scale: 1.05,
-                rotate: 0,
-                boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
-                transition: { duration: 0.15 }
+                y: -8,
+                boxShadow: "0 12px 30px rgba(0,0,0,0.25)",
+                transition: { duration: 0.2 }
             }}
             className="relative w-40 h-40 md:w-60 md:h-60 p-4 cursor-default flex-shrink-0"
             style={{
@@ -108,14 +118,35 @@ function PostIt({
                     {note.title}
                 </h3>
                 <div className="flex-1 flex flex-col justify-start gap-1">
-                    {note.lines.map((line, i) => (
-                        <p
-                            key={i}
-                            className="text-xs md:text-sm text-muted-foreground/70 leading-relaxed"
-                        >
-                            {line}
-                        </p>
-                    ))}
+                    {note.lines.map((line, i) => {
+                        const isLink = typeof line === "object" && line.href;
+                        const text = typeof line === "string" ? line : line.text;
+                        const href = typeof line === "object" ? line.href : undefined;
+
+                        if (isLink && href) {
+                            return (
+                                <a
+                                    key={i}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xs md:text-sm text-muted-foreground/70 leading-relaxed hover:text-foreground transition-colors cursor-pointer"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    {text}
+                                </a>
+                            );
+                        }
+
+                        return (
+                            <p
+                                key={i}
+                                className="text-xs md:text-sm text-muted-foreground/70 leading-relaxed"
+                            >
+                                {text}
+                            </p>
+                        );
+                    })}
                 </div>
             </div>
         </motion.div>
@@ -123,3 +154,4 @@ function PostIt({
 }
 
 export default PostItSection;
+
