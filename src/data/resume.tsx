@@ -4,6 +4,11 @@ import { HomeIcon, NotebookIcon, Orbit, FolderKanban } from "lucide-react";
 export const DATA = {
   name: "aarshia verma",
   initials: "AV",
+  url: "https://aarsh1a.github.io",
+  description:
+    ".",
+  summary:
+    ".",
   avatarUrl: "/me.jpeg",
 
   navbar: [
