@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import BlurFade from "@/components/magicui/blur-fade";
-import { X, Download } from "lucide-react";
+import { X, Download, Send, Mail } from "lucide-react";
+import { useForm, ValidationError } from "@formspree/react";
 
 const TILES = [
     {
@@ -32,8 +33,7 @@ const TILES = [
     {
         id: "contact",
         label: "leave a note",
-        isExternal: true,
-        href: "mailto:contact@example.com",
+        isContact: true,
         image: "/tile-5.png",
     },
 ];
@@ -42,6 +42,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 export function LandingHero() {
     const [showResume, setShowResume] = useState(false);
+    const [showEnvelope, setShowEnvelope] = useState(false);
 
     const handleNavigation = (tile: (typeof TILES)[0]) => {
         if (tile.isResume) {
@@ -49,8 +50,8 @@ export function LandingHero() {
             return;
         }
 
-        if (tile.isExternal && tile.href) {
-            window.location.href = tile.href;
+        if (tile.isContact) {
+            setShowEnvelope(true);
             return;
         }
 
@@ -66,7 +67,7 @@ export function LandingHero() {
     };
 
     return (
-        <section id="hero" className="min-h-screen flex items-center justify-center pb-24 relative overflow-hidden">
+        <section id="hero" className="min-h-screen flex items-center justify-center pb-24 relative overflow-visible">
             {/* Subtle background stars - Truly randomized distribution */}
             <div className="absolute inset-0 pointer-events-none">
                 {/* 4-point stars - scattered everywhere */}
@@ -184,6 +185,9 @@ export function LandingHero() {
                                 tile={tile}
                                 index={index}
                                 onClick={() => handleNavigation(tile)}
+                                isContact={tile.isContact}
+                                showEnvelope={tile.isContact ? showEnvelope : false}
+                                onCloseEnvelope={() => setShowEnvelope(false)}
                             />
                         ))}
                     </div>
@@ -273,10 +277,16 @@ function Tile({
     tile,
     index,
     onClick,
+    isContact,
+    showEnvelope,
+    onCloseEnvelope,
 }: {
     tile: (typeof TILES)[0];
     index: number;
     onClick: () => void;
+    isContact?: boolean;
+    showEnvelope?: boolean;
+    onCloseEnvelope?: () => void;
 }) {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -304,9 +314,10 @@ function Tile({
                 }}
                 aria-label={`Navigate to ${tile.label}`}
             />
+
             {/* Hover tooltip - absolute so it doesn't affect layout */}
             <AnimatePresence>
-                {isHovered && (
+                {isHovered && !showEnvelope && (
                     <motion.span
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -318,6 +329,189 @@ function Tile({
                     </motion.span>
                 )}
             </AnimatePresence>
+
+            {/* Envelope popup - appears next to the contact tile */}
+            <AnimatePresence>
+                {isContact && showEnvelope && onCloseEnvelope && (
+                    <EnvelopePopup onClose={onCloseEnvelope} />
+                )}
+            </AnimatePresence>
         </div>
     );
 }
+
+function EnvelopePopup({ onClose }: { onClose: () => void }) {
+    const [formState, handleSubmit] = useForm("xaqnnode");
+
+    return (
+        <>
+            {/* Invisible backdrop to close on click outside */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={onClose}
+                className="fixed inset-0 z-[50]"
+            />
+
+            {/* Speech bubble popup - positioned to the right of the tile */}
+            <motion.div
+                initial={{
+                    opacity: 0,
+                    scale: 0,
+                    x: -80,
+                    y: "0%",
+                }}
+                animate={{
+                    opacity: 1,
+                    scale: 1,
+                    x: 0,
+                    y: "-30%",
+                }}
+                exit={{
+                    opacity: 0,
+                    scale: 0,
+                    x: -80,
+                    y: "0%",
+                }}
+                transition={{
+                    duration: 0.5,
+                    ease: [0.4, 0, 0.2, 1],
+                }}
+                className="absolute left-full top-0 ml-20 z-[51]"
+            >
+                {/* Curved line connectors from tile to popup - top and bottom */}
+                <svg
+                    className="absolute right-full top-0 w-20 h-full overflow-visible pointer-events-none"
+                    viewBox="0 0 80 200"
+                    fill="none"
+                    preserveAspectRatio="none"
+                    style={{ marginRight: "-2px" }}
+                >
+                    {/* Top curved line */}
+                    <motion.path
+                        d="M0 100 Q 30 100 50 50 Q 70 0 80 0"
+                        stroke="rgba(255, 255, 255, 0.2)"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        fill="none"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        exit={{ pathLength: 0, opacity: 0 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                    />
+                    {/* Bottom curved line */}
+                    <motion.path
+                        d="M0 100 Q 30 100 50 150 Q 70 200 80 200"
+                        stroke="rgba(255, 255, 255, 0.2)"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        fill="none"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        exit={{ pathLength: 0, opacity: 0 }}
+                        transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
+                    />
+                </svg>
+
+                <div
+                    className="relative w-[260px] md:w-[280px] rounded-xl overflow-hidden backdrop-blur-md"
+                    style={{
+                        background: "rgba(15, 12, 20, 0.85)",
+                        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08)",
+                    }}
+                >
+                    {/* Header */}
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-white/5">
+                        <div className="flex items-center gap-2">
+                            <Mail size={14} className="text-foreground/60" />
+                            <span className="text-xs font-medium text-foreground/80">leave a note</span>
+                        </div>
+                        <button
+                            onClick={onClose}
+                            className="p-1 rounded-full text-muted-foreground/60 hover:text-foreground/80 hover:bg-white/5 transition-all"
+                        >
+                            <X size={14} />
+                        </button>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-4">
+                        {formState.succeeded ? (
+                            <motion.div
+                                initial={{ opacity: 0, y: 5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-center py-4"
+                            >
+                                <div className="w-10 h-10 mx-auto mb-3 rounded-full bg-foreground/5 flex items-center justify-center">
+                                    <Send className="w-4 h-4 text-foreground/60" />
+                                </div>
+                                <p className="text-xs text-foreground/70">note sent ✨</p>
+                            </motion.div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-3">
+                                {/* Name field */}
+                                <div>
+                                    <input
+                                        id="name"
+                                        type="text"
+                                        name="name"
+                                        required
+                                        className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/5 text-foreground/90 placeholder:text-foreground/30 focus:outline-none focus:border-white/15 transition-all text-xs"
+                                        placeholder="name"
+                                    />
+                                    <ValidationError
+                                        prefix="Name"
+                                        field="name"
+                                        errors={formState.errors}
+                                        className="text-[10px] text-red-400/80 mt-1"
+                                    />
+                                </div>
+
+                                {/* Note field */}
+                                <div>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        required
+                                        rows={3}
+                                        className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/5 text-foreground/90 placeholder:text-foreground/30 focus:outline-none focus:border-white/15 transition-all text-xs resize-none"
+                                        placeholder="leave your thoughts here..."
+                                    />
+                                    <ValidationError
+                                        prefix="Message"
+                                        field="message"
+                                        errors={formState.errors}
+                                        className="text-[10px] text-red-400/80 mt-1"
+                                    />
+                                </div>
+
+                                {/* Submit button */}
+                                <motion.button
+                                    type="submit"
+                                    disabled={formState.submitting}
+                                    whileHover={{ scale: 1.01 }}
+                                    whileTap={{ scale: 0.99 }}
+                                    className="w-full py-2 rounded-lg bg-foreground/10 hover:bg-foreground/15 text-foreground/80 text-xs font-medium flex items-center justify-center gap-1.5 transition-all disabled:opacity-50"
+                                >
+                                    {formState.submitting ? (
+                                        <motion.div
+                                            animate={{ rotate: 360 }}
+                                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                            className="w-3 h-3 border border-foreground/20 border-t-foreground/60 rounded-full"
+                                        />
+                                    ) : (
+                                        <>
+                                            send ➜
+                                        </>
+                                    )}
+                                </motion.button>
+                            </form>
+                        )}
+                    </div>
+                </div>
+            </motion.div >
+        </>
+    );
+}
+

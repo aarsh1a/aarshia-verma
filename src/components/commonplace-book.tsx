@@ -293,10 +293,16 @@ export const CommonplaceBook = ({ delay = 0 }: CommonplaceBookProps) => {
                                 <h3 className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/40 mb-3">
                                     Research Notes
                                 </h3>
-                                <div className="flex items-center gap-2 text-sm text-white/60 mb-2 cursor-pointer hover:text-white/80 transition-colors">
+                                <a
+                                    href="https://drive.google.com/file/d/1LoUkmNktbiol1c3wRKMgRmddc-PJXcPZ/view?usp=sharing"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-sm text-white/60 mb-2 cursor-pointer hover:text-white/80 transition-colors group"
+                                >
                                     <FourPointStar className="w-2 h-2 text-white/40" />
                                     <span>k8sgpt for 5g telco clusters</span>
-                                </div>
+                                    <ExternalLink size={10} className="text-white/20 group-hover:text-white/50 transition-colors" />
+                                </a>
                             </div>
 
                             {/* Building */}
@@ -356,9 +362,14 @@ export const CommonplaceBook = ({ delay = 0 }: CommonplaceBookProps) => {
                                     <span className="text-[10px] text-white/30 uppercase tracking-wider">
                                         linux foundation • 2024
                                     </span>
-                                    <button className="text-[10px] text-white/40 hover:text-white transition-colors flex items-center gap-1">
-                                        read note →
-                                    </button>
+                                    <a
+                                        href="https://drive.google.com/file/d/1LoUkmNktbiol1c3wRKMgRmddc-PJXcPZ/view?usp=sharing"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-[10px] text-white/40 hover:text-white transition-colors flex items-center gap-1"
+                                    >
+                                        read more →
+                                    </a>
                                 </div>
                             </div>
 
