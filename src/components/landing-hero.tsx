@@ -442,12 +442,9 @@ function EnvelopePopup({ onClose }: { onClose: () => void }) {
                             <motion.div
                                 initial={{ opacity: 0, y: 5 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="text-center py-4"
+                                className="text-center py-6"
                             >
-                                <div className="w-10 h-10 mx-auto mb-3 rounded-full bg-foreground/5 flex items-center justify-center">
-                                    <Send className="w-4 h-4 text-foreground/60" />
-                                </div>
-                                <p className="text-xs text-foreground/70 flex items-center gap-1">note sent <Star className="w-3 h-3 fill-current" /></p>
+                                <p className="text-xs text-foreground/70 flex items-center justify-center gap-1">note sent <Star className="w-3 h-3 fill-current" /></p>
                             </motion.div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-3">
